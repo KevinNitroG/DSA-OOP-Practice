@@ -1,0 +1,28 @@
+
+root = true
+
+[*.cpp]
+end_of_line = crlf
+trim_trailing_whitespace = true
+tab_width = 4
+indent_size = 4
+indent_style = space
+charset = utf-8
+insert_final_newline = true
+
+[*.{c++,cc,cpp,cppm,cxx,h,h++,hh,hpp,hxx,inl,ipp,ixx,tlh,tli}]
+
+# Visual C++ Code Style settings
+
+cpp_generate_documentation_comments = xml
+
+# Visual C++ Inlcude Cleanup settings
+
+cpp_include_cleanup_add_missing_error_tag_type = suggestion
+cpp_include_cleanup_remove_unused_error_tag_type = dimmed
+cpp_include_cleanup_sort_after_edits = false
+cpp_sort_includes_error_tag_type = none
+cpp_sort_includes_priority_case_sensitive = false
+cpp_sort_includes_priority_style = quoted
+cpp_includes_style = default
+cpp_includes_use_forward_slash = true
