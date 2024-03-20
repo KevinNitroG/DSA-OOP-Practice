@@ -18,26 +18,39 @@ int FindMax(int a[], const int &n)
     return a[max];
 }
 
-int *CountingSort(int inputArray[], const int &n)
+void CountingSort(int inputArray[], const int &n, const int &exp)
 {
+    int *exponentArray = new int[n];
+    for (int i = 0; i < n; i++)
+        exponentArray[i] = inputArray[i] / exp % 10;
     int M = FindMax(inputArray, n);
     int *processArray = new int[M]{0};
     for (int i = 0; i < n; i++)
-        processArray[inputArray[i]]++;
+        processArray[exponentArray[i]]++;
     for (int i = 1; i < M; i++)
         processArray[i] += processArray[i - 1];
     int *outputArray = new int[n];
     for (int i = 0; i < n; i++)
-        outputArray[processArray[--inputArray[i]]] = inputArray[i];
+        outputArray[processArray[--exponentArray[i]]] = inputArray[i];
+    for (int i = 0; i < n; i++)
+        inputArray[i] = outputArray[i];
+    delete[] exponentArray;
     delete[] processArray;
-    return outputArray;
+    delete[] outputArray;
+}
+
+void RadixSort(int inputArray[], const int &n)
+{
+    int M = FindMax(inputArray, n);
+    for (int exp = 1; M / exp > 0; exp *= 10)
+        CountingSort(inputArray, n, exp);
 }
 
 int main()
 {
     int arr[] = {1, 9, 2, 8, 3, 7, 4, 6, 5};
     int size = sizeof(arr) / sizeof(arr[0]);
-    int *sortedArray = CountingSort(arr, size);
-    PrintArray(sortedArray, size);
+    RadixSort(arr, size);
+    PrintArray(arr, size);
     return 0;
 }
