@@ -1,5 +1,4 @@
 #include <iostream>
-
 using namespace std;
 
 void PrintArray(const int a[], const int &n)
