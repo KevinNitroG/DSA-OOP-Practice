@@ -1,4 +1,3 @@
-#include <corecrt_math.h>
 #include <iostream>
 
 using namespace std;
