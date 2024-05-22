@@ -13,7 +13,7 @@ class BST
 {
   public:
     Node *root;
-    static void insert(Node *_root, int _data)
+    static void insert(Node *&_root, int _data)
     {
         if (!_root)
         {
@@ -46,6 +46,32 @@ class BST
             printLevelK(_root->left, k - 1);
             printLevelK(_root->right, k - 1);
         }
+    }
+
+    static void removeMin(Node *&_root)
+    {
+        // In case delete the root node
+        if (!_root)
+            return;
+        Node *cur = _root;
+        while (cur->left)
+            cur = cur->left;
+        Node *temp = cur;
+        cur = cur->right;
+        delete temp;
+        temp = NULL;
+        // If the node deleted is root, update the root
+        if (!_root)
+            _root = cur;
+    }
+
+    static int findMax(Node *_root)
+    {
+        if (!_root)
+            return -1;
+        while (_root->right)
+            _root = _root->right;
+        return _root->data;
     }
 };
 
