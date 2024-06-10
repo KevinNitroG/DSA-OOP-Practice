@@ -1,4 +1,3 @@
-
 #include <iostream>
 using namespace std;
 
@@ -15,7 +14,7 @@ Node *CreateNode(const int &n)
     return new Node{n, NULL, NULL};
 }
 
-void AddNode(Node *root, const int &n)
+void AddNode(Node *&root, const int &n)
 {
     if (!root)
         root = CreateNode(n);
@@ -29,6 +28,7 @@ void printNLR(Node *&root)
 {
     if (!root)
         return;
+    cout << root->data;
     printNLR(root->left);
     printNLR(root->right);
 }
@@ -57,11 +57,19 @@ Node *DeleteNode(Node *&root, const int &n)
     }
 
     // Find rightly of left child
-    Node *temp = root->left;
-    while (temp->right)
-        temp = temp->right;
-    root->data = temp->data;
-    delete temp;
+    Node *succ = root->left;
+    Node *succPar = NULL;
+    while (succ->right)
+    {
+        succPar = succ;
+        succ = succ->right;
+    }
+    root->data = succ->data;
+    if (succPar == root)
+        succPar->left = succ->left;
+    else
+        succPar->right = succ->left;
+    delete succ;
     return root;
 }
 
@@ -71,15 +79,26 @@ int main()
     int input;
     Node *root = NULL;
 
+    cin >> n;
+
     while (n--)
     {
         cin >> input;
         AddNode(root, input);
     }
 
-    cout << "Nhap so can xoa: ";
-    cin >> input;
+    cout << "Xuat cac node" << endl;
+    printNLR(root);
 
+    cout << "Nhap lan xoa: ";
+    cin >> n;
+    while (n--)
+    {
+        cin >> input;
+        DeleteNode(root, input);
+    }
+
+    cout << "Xuat cac node" << endl;
     printNLR(root);
 
     return 0;
