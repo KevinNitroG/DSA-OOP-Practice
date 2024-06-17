@@ -11,6 +11,10 @@ Ban1
 7
 Ban2
 5
+1
+2
+3
+4
 
 */
 #include <iostream>
@@ -29,18 +33,11 @@ enum NHOM_MAU
     O
 };
 
-const map<pair<NHOM_MAU, NHOM_MAU>, set<NHOM_MAU>> MAU_CON = {{
-                                                                  {A, A},
-                                                                  {A, O},
-                                                              },
-                                                              {{A, B}, {A, B, AB, O}},
-                                                              {{A, AB}, {A, B, AB}},
-                                                              {{A, O}, {A, O}},
-                                                              {{B, B}, {B, O}},
-                                                              {{B, AB}, {A, B, AB}},
-                                                              {{B, O}, {B, O}},
-                                                              {{AB, AB}, {A, B}},
-                                                              {{O, O}, {O}}};
+const map<pair<NHOM_MAU, NHOM_MAU>, set<NHOM_MAU>> MAU_CON = {
+    {{A, A}, {A, O}}, {{A, B}, {A, B, AB, O}}, {{B, A}, {A, B, AB, O}}, {{A, AB}, {A, B, AB}}, {{AB, A}, {A, B, AB}},
+    {{A, O}, {A, O}}, {{O, A}, {A, O}},        {{B, B}, {B, O}},        {{B, AB}, {A, B, AB}}, {{AB, B}, {A, B, AB}},
+    {{B, O}, {B, O}}, {{O, B}, {B, O}},        {{AB, AB}, {A, B}},      {{O, O}, {O}},
+};
 
 enum NHOM_MAU_CHO_NHAN
 {
@@ -57,7 +54,8 @@ enum NHOM_MAU_CHO_NHAN
 const set<pair<NHOM_MAU_CHO_NHAN, NHOM_MAU_CHO_NHAN>> CHO_NHAN = {
     {Om, Om},   {Om, Op},  {Op, Op},  {Om, Am},  {Am, Am},  {Om, Ap},  {Op, Ap},  {Am, Ap},   {Ap, Ap},
     {Om, Bm},   {Bm, Bm},  {Om, Bp},  {Op, Bp},  {Bm, Bp},  {Bp, Bp},  {Om, ABm}, {Am, ABm},  {Bm, ABm},
-    {ABm, ABm}, {Om, ABp}, {Op, ABp}, {Am, ABp}, {Ap, ABp}, {Bm, ABp}, {Bp, ABp}, {ABm, ABp}, {ABp, ABp}};
+    {ABm, ABm}, {Om, ABp}, {Op, ABp}, {Am, ABp}, {Ap, ABp}, {Bm, ABp}, {Bp, ABp}, {ABm, ABp}, {ABp, ABp},
+};
 
 class Nguoi
 {
@@ -217,7 +215,7 @@ void DanhSach::KiemTraTruyenMau() const
     cin >> sel;
     nguoiNhan = this->dsNguoi[sel - 1];
     cout << "Danh sach nguoi cho mau:" << endl;
-    for (auto &nguoiTruyen : this->dsNguoi)
-        if (CHO_NHAN.find({nguoiTruyen.nhomMauChoNhan, nguoiNhan.nhomMauChoNhan}) != CHO_NHAN.end())
-            nguoiTruyen.Xuat();
+    for (auto &nguoiCho : this->dsNguoi)
+        if (CHO_NHAN.find({nguoiCho.nhomMauChoNhan, nguoiNhan.nhomMauChoNhan}) != CHO_NHAN.end())
+            nguoiCho.Xuat();
 }
