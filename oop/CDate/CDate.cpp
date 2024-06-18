@@ -72,7 +72,7 @@ void CDate::Output() const
 
 bool CDate::isLeap() const
 {
-    return (!(this->year % 4) && (!(this->year % 100)) || !this->year % 400);
+    return !(this->year % 4) && (!(this->year % 100) || !this->year % 400);
 }
 
 CDate &CDate::operator++()
@@ -128,7 +128,7 @@ CDate CDate::operator-(const int &n) const
             res.month = 12;
             --res.year;
         }
-        res.day += (res.isLeap() ? monthsOfLeap[res.month] : monthsOfNoLeap[res.month]);
+        res.day += res.isLeap() ? monthsOfLeap[res.month] : monthsOfNoLeap[res.month];
     }
     return res;
 }
