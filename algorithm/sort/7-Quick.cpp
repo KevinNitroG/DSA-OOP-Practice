@@ -16,7 +16,6 @@ int Partition(int a[], const int &l, const int &r)
     for (int j = l; j <= r; ++j)
         if (a[j] <= pi)
             swap(a[++i], a[j]);
-    swap(a[++i], a[r]);
     return i;
 }
 
