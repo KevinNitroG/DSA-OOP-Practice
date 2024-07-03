@@ -9,7 +9,7 @@ void PrintArray(const int a[], const int &n)
     cout << endl;
 }
 
-void InsertionSort(int a[], const int &n)
+void BubbleSort(int a[], const int &n)
 {
     for (int i = 0; i < n - 2; i++)
     {
@@ -25,7 +25,7 @@ int main()
 {
     int arr[] = {1, 9, 2, 8, 3, 7, 4, 6, 5};
     int size = sizeof(arr) / sizeof(arr[0]);
-    InsertionSort(arr, size);
+    BubbleSort(arr, size);
     PrintArray(arr, size);
     return 0;
 }

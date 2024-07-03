@@ -13,7 +13,6 @@ class CDate
   public:
     static int monthsOfLeap[13];
     static int monthsOfNoLeap[13];
-    // CDate(CDate &);
     void Input();
     void Output() const;
     bool isLeap() const;
@@ -48,13 +47,6 @@ int main()
 int CDate::monthsOfLeap[13] = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 int CDate::monthsOfNoLeap[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-// CDate::CDate(CDate &rhs)
-// {
-//     this->day = rhs.day;
-//     this->month = rhs.month;
-//     this->year = rhs.year;
-// }
-
 void CDate::Input()
 {
     cout << "Nhap ngay: ";
@@ -72,7 +64,7 @@ void CDate::Output() const
 
 bool CDate::isLeap() const
 {
-    return !(this->year % 4) && (!(this->year % 100) || !this->year % 400);
+    return (!this->year % 4 && !this->year % 100) || !this->year % 400;
 }
 
 CDate &CDate::operator++()
